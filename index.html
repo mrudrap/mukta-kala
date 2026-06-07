@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mukta Kala - Art Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #faf8f5;
+            --bg-warm: #f5f0ea;
+            --bg-dark: #1a1512;
+            --accent: #8b6914;
+            --accent-light: rgba(139, 105, 20, 0.08);
+            --text: #2c2420;
+            --text-secondary: #5c524a;
+            --text-muted: #8a7f76;
+            --border: #e8e2da;
+            --shadow-lg: 0 12px 40px rgba(44, 36, 32, 0.12);
+            --radius: 4px;
+            --font-display: Georgia, 'Times New Roman', serif;
+            --font-body: 'Segoe UI', -apple-system, sans-serif;
+        }
+
+        body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+        .header { background: var(--bg-dark); color: #f5f0ea; }
+
+        .header-main {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 48px; max-width: 1600px; margin: 0 auto;
+        }
+
+        .logo { display: flex; align-items: center; gap: 14px; }
+
+        .logo-mark {
+            width: 42px; height: 42px; border: 1.5px solid var(--accent);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--accent);
+        }
+
+        .logo h1 { font-family: var(--font-display); font-size: 24px; font-weight: 400; }
+        .logo span { display: block; font-size: 11px; color: rgba(245,240,234,0.4); letter-spacing: 3px; text-transform: uppercase; margin-top: 2px; }
+
+        .nav {
+            display: flex; gap: 28px; padding: 12px 48px;
+            border-top: 1px solid rgba(255,255,255,0.06); max-width: 1600px; margin: 0 auto;
+        }
+
+        .nav a {
+            color: rgba(245,240,234,0.5); text-decoration: none; font-size: 12px;
+            text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer; transition: color 0.2s; padding: 6px 0;
+        }
+
+        .nav a:hover, .nav a.active { color: var(--accent); }
+        .nav a.active { border-bottom: 1.5px solid var(--accent); }
+
+        .hero { text-align: center; padding: 64px 48px 48px; background: linear-gradient(to bottom, var(--bg-warm), var(--bg)); }
+        .hero h2 { font-family: var(--font-display); font-size: 40px; font-weight: 400; margin-bottom: 12px; font-style: italic; }
+        .hero p { color: var(--text-muted); font-size: 16px; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+        .hero .divider { width: 60px; height: 1px; background: var(--accent); margin: 20px auto 0; }
+
+        .gallery-section { max-width: 1400px; margin: 0 auto; padding: 40px 48px 80px; }
+
+        .gallery-info {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+        }
+
+        .gallery-info h3 { font-family: var(--font-display); font-size: 18px; font-weight: 400; color: var(--text-secondary); }
+        .gallery-info span { font-size: 13px; color: var(--text-muted); }
+
+        .gallery-grid { columns: 3; column-gap: 20px; }
+
+        .gallery-item {
+            break-inside: avoid; margin-bottom: 20px; border-radius: var(--radius);
+            overflow: hidden; background: white; border: 1px solid var(--border);
+            cursor: pointer; transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .gallery-item img { width: 100%; display: block; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.02); }
+
+        .gallery-item .caption { padding: 14px 16px; border-top: 1px solid var(--border); }
+        .gallery-item .caption h4 { font-family: var(--font-display); font-size: 14px; font-weight: 400; margin-bottom: 4px; }
+        .gallery-item .caption .cat { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+
+        .lightbox {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26, 21, 18, 0.96); z-index: 1000;
+            display: none; align-items: center; justify-content: center;
+            flex-direction: column; padding: 40px;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90vw; max-height: 78vh; border-radius: 2px; box-shadow: 0 24px 64px rgba(0,0,0,0.4); }
+
+        .lightbox-caption { margin-top: 20px; text-align: center; color: rgba(245,240,234,0.85); }
+        .lightbox-caption h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; font-style: italic; }
+        .lightbox-caption span { font-size: 12px; color: rgba(245,240,234,0.4); text-transform: uppercase; letter-spacing: 2px; display: block; margin-top: 6px; }
+
+        .lightbox-close {
+            position: absolute; top: 24px; right: 32px; width: 44px; height: 44px;
+            border-radius: 50%; background: transparent; border: 1px solid rgba(245,240,234,0.2);
+            color: rgba(245,240,234,0.7); font-size: 18px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+        }
+        .lightbox-close:hover { background: rgba(245,240,234,0.1); }
+
+        .lightbox-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(245,240,234,0.8); font-size: 18px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.1); }
+        .lightbox-prev { left: 24px; }
+        .lightbox-next { right: 24px; }
+
+        .empty-state { text-align: center; padding: 100px 40px; }
+        .empty-state i { font-size: 48px; color: var(--border); margin-bottom: 20px; }
+        .empty-state h3 { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--text-secondary); margin-bottom: 8px; }
+        .empty-state p { color: var(--text-muted); font-size: 15px; }
+
+        .loading { text-align: center; padding: 60px; color: var(--text-muted); }
+
+        .footer { background: var(--bg-dark); color: rgba(245,240,234,0.4); text-align: center; padding: 32px 48px; font-size: 12px; }
+        .footer .ft-name { font-family: var(--font-display); font-size: 16px; color: rgba(245,240,234,0.7); margin-bottom: 8px; }
+
+        @media (max-width: 1024px) { .gallery-grid { columns: 2; } }
+        @media (max-width: 600px) {
+            .gallery-grid { columns: 1; }
+            .header-main { padding: 16px 20px; }
+            .nav { padding: 10px 20px; gap: 16px; overflow-x: auto; }
+            .hero { padding: 40px 20px 32px; }
+            .hero h2 { font-size: 30px; }
+            .gallery-section { padding: 24px 20px 60px; }
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-main">
+            <div class="logo">
+                <div class="logo-mark">MK</div>
+                <div>
+                    <h1>Mukta Kala</h1>
+                    <span>Art Gallery</span>
+                </div>
+            </div>
+        </div>
+        <nav class="nav" id="navBar"></nav>
+    </header>
+
+    <section class="hero">
+        <h2 id="heroTitle">The Art of Mukta</h2>
+        <p id="heroTagline"></p>
+        <div class="divider"></div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="gallery-info">
+            <h3 id="filterTitle">All Works</h3>
+            <span id="artCount"></span>
+        </div>
+        <div class="gallery-grid" id="gallery">
+            <div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading gallery...</div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="ft-name">Mukta Kala</div>
+        <p>All artwork is original and created by Mukta</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lbClose"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lightbox-nav lightbox-prev" id="lbPrev"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="lightbox-nav lightbox-next" id="lbNext"><i class="fa-solid fa-chevron-right"></i></button>
+        <img id="lbImg" src="" alt="">
+        <div class="lightbox-caption">
+            <h3 id="lbTitle"></h3>
+            <span id="lbCat"></span>
+        </div>
+    </div>
+
+    <script>
+        var artworks = [];
+        var currentFilter = 'all';
+        var currentLbIndex = 0;
+        var filteredWorks = [];
+
+        function escapeHtml(str) { var d = document.createElement('div'); d.textContent = str || ''; return d.innerHTML; }
+
+        // Load data from data.json
+        fetch('data.json')
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                artworks = data.artworks || [];
+                // Set gallery info
+                if (data.gallery) {
+                    document.getElementById('heroTagline').textContent = data.gallery.tagline || '';
+                }
+                buildNav();
+                renderGallery();
+            })
+            .catch(function(err) {
+                document.getElementById('gallery').innerHTML = '<div class="empty-state"><i class="fa-regular fa-image"></i><h3>Could not load gallery</h3><p>Make sure data.json exists in the same folder</p></div>';
+            });
+
+        function buildNav() {
+            var cats = ['all'];
+            for (var i = 0; i < artworks.length; i++) {
+                var c = artworks[i].category;
+                if (c && cats.indexOf(c) === -1) cats.push(c);
+            }
+            var nav = document.getElementById('navBar');
+            var html = '';
+            for (var i = 0; i < cats.length; i++) {
+                var label = cats[i] === 'all' ? 'All Works' : cats[i];
+                var active = cats[i] === 'all' ? ' class="active"' : '';
+                html += '<a data-filter="' + cats[i] + '"' + active + '>' + escapeHtml(label) + '</a>';
+            }
+            nav.innerHTML = html;
+
+            // Attach click events
+            var links = nav.querySelectorAll('a');
+            for (var i = 0; i < links.length; i++) {
+                links[i].addEventListener('click', function() {
+                    var all = nav.querySelectorAll('a');
+                    for (var j = 0; j < all.length; j++) all[j].classList.remove('active');
+                    this.classList.add('active');
+                    currentFilter = this.getAttribute('data-filter');
+                    document.getElementById('filterTitle').textContent = currentFilter === 'all' ? 'All Works' : currentFilter;
+                    renderGallery();
+                });
+            }
+        }
+
+        function getFiltered() {
+            if (currentFilter === 'all') return artworks;
+            return artworks.filter(function(a) { return a.category === currentFilter; });
+        }
+
+        function renderGallery() {
+            var gallery = document.getElementById('gallery');
+            filteredWorks = getFiltered();
+            document.getElementById('artCount').textContent = filteredWorks.length + ' artwork' + (filteredWorks.length !== 1 ? 's' : '');
+
+            if (filteredWorks.length === 0) {
+                gallery.innerHTML = '<div class="empty-state"><i class="fa-regular fa-image"></i><h3>Gallery awaits artwork</h3><p>No artworks in this collection yet</p></div>';
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < filteredWorks.length; i++) {
+                var art = filteredWorks[i];
+                html += '<div class="gallery-item" data-index="' + i + '">' +
+                    '<img src="' + escapeHtml(art.image) + '" alt="' + escapeHtml(art.title) + '" loading="lazy">' +
+                    '<div class="caption">' +
+                        '<h4>' + escapeHtml(art.title) + '</h4>' +
+                        '<span class="cat">' + escapeHtml(art.category || '') + '</span>' +
+                    '</div>' +
+                '</div>';
+            }
+            gallery.innerHTML = html;
+        }
+
+        // Lightbox
+        document.getElementById('gallery').addEventListener('click', function(e) {
+            var item = e.target.closest('.gallery-item');
+            if (!item) return;
+            currentLbIndex = parseInt(item.getAttribute('data-index'));
+            showLightbox();
+        });
+
+        function showLightbox() {
+            if (!filteredWorks[currentLbIndex]) return;
+            var art = filteredWorks[currentLbIndex];
+            document.getElementById('lbImg').src = art.image;
+            document.getElementById('lbTitle').textContent = art.title;
+            document.getElementById('lbCat').textContent = art.category || '';
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        document.getElementById('lbClose').addEventListener('click', function() { document.getElementById('lightbox').classList.remove('active'); });
+        document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target === this) this.classList.remove('active'); });
+        document.getElementById('lbPrev').addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentLbIndex = (currentLbIndex - 1 + filteredWorks.length) % filteredWorks.length;
+            showLightbox();
+        });
+        document.getElementById('lbNext').addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentLbIndex = (currentLbIndex + 1) % filteredWorks.length;
+            showLightbox();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
+            if (e.key === 'ArrowLeft') { currentLbIndex = (currentLbIndex - 1 + filteredWorks.length) % filteredWorks.length; showLightbox(); }
+            if (e.key === 'ArrowRight') { currentLbIndex = (currentLbIndex + 1) % filteredWorks.length; showLightbox(); }
+        });
+    </script>
+</body>
+</html>

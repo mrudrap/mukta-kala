@@ -1,0 +1,16 @@
+{
+  "gallery": {
+    "name": "Mukta Kala",
+    "tagline": "A curated collection of original artworks exploring color, form, and the beauty of creative expression",
+    "artist": "Mukta"
+  },
+  "artworks": [
+    {
+      "id": "1",
+      "title": "Sample Artwork",
+      "category": "Painting",
+      "image": "images/sample.jpg",
+      "date": "2026-06-07"
+    }
+  ]
+}
