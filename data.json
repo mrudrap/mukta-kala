@@ -1,33 +1,177 @@
 {
-gallery: {
-name: "Mukta Kala"
-tagline: "A curated collection of original artworks exploring color, form, and the beauty of creative expression"
-artist: "Mukta"
-}
-artworks: [
-0: {...}
-1: {...}
-2: {...}
-3: {...}
-4: {...}
-5: {...}
-6: {...}
-7: {...}
-8: {...}
-9: {...}
-10: {...}
-11: {...}
-12: {...}
-13: {...}
-14: {...}
-15: {...}
-16: {...}
-17: {...}
-18: {...}
-19: {...}
-20: {...}
-21: {...}
-22: {...}
-23: {...}
-]
+  "gallery": {
+    "name": "Mukta Kala",
+    "tagline": "A curated collection of original artworks exploring color, form, and the beauty of creative expression",
+    "artist": "Mukta"
+  },
+  "artworks": [
+    {
+      "id": "1",
+      "title": "Lakeside Cottage at Dawn",
+      "category": "Painting",
+      "image": "images/lakeside cottage at dawn.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "2",
+      "title": "Moonlit Rose Garden",
+      "category": "Painting",
+      "image": "images/moonlit rose garden.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "3",
+      "title": "A Cup of Peace",
+      "category": "Painting",
+      "image": "images/a cup of peace.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "4",
+      "title": "Rainbow Bubbles",
+      "category": "Painting",
+      "image": "images/rainbow bubbles.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "5",
+      "title": "The Moon Never Begs for Attention",
+      "category": "Painting",
+      "image": "images/the moon never begs for attention.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "6",
+      "title": "Floral Portrait",
+      "category": "Sketch",
+      "image": "images/floral portrait.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "7",
+      "title": "Peacock Mandala Eye",
+      "category": "Mixed Media",
+      "image": "images/peacock mandala eye.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "8",
+      "title": "Graceful Saree Drape",
+      "category": "Sketch",
+      "image": "images/graceful saree drape.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "9",
+      "title": "Boat on the Shore",
+      "category": "Sketch",
+      "image": "images/boat on the shore.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "10",
+      "title": "Koi Fish Mandala",
+      "category": "Mixed Media",
+      "image": "images/koi fish mandala.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "11",
+      "title": "Celestial Eyes Study",
+      "category": "Sketch",
+      "image": "images/celestial eyes study.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "12",
+      "title": "Indian Beauty Portrait",
+      "category": "Painting",
+      "image": "images/indian beauty portrait.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "13",
+      "title": "Cocktail on Train Ticket",
+      "category": "Mixed Media",
+      "image": "images/cocktail on train ticket.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "14",
+      "title": "Lily on Train Ticket",
+      "category": "Mixed Media",
+      "image": "images/lily on train ticket.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "15",
+      "title": "Eye on Train Ticket",
+      "category": "Mixed Media",
+      "image": "images/eye on train ticket.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "16",
+      "title": "Wine and Eiffel Tower on Ticket",
+      "category": "Mixed Media",
+      "image": "images/wine and eiffel tower on ticket.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "17",
+      "title": "Watermill on Train Ticket",
+      "category": "Mixed Media",
+      "image": "images/watermill on train ticket.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "18",
+      "title": "This Heart Belongs to Art",
+      "category": "Mixed Media",
+      "image": "images/this heart belongs to art.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "19",
+      "title": "Tuscan Countryside",
+      "category": "Painting",
+      "image": "images/tuscan countryside.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "20",
+      "title": "Starry Night Lightbulb",
+      "category": "Mixed Media",
+      "image": "images/starry night lightbulb.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "21",
+      "title": "Fishing",
+      "category": "Painting",
+      "image": "images/fishing.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "22",
+      "title": "Pretty Lady",
+      "category": "Sketch",
+      "image": "images/preety lady.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "23",
+      "title": "The Burning Desire",
+      "category": "Painting",
+      "image": "images/the burning desire.jpeg",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "24",
+      "title": "Village Home",
+      "category": "Painting",
+      "image": "images/village home.jpeg",
+      "date": "2026-06-08"
+    }
+  ]
 }
